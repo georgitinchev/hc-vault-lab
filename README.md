@@ -12,8 +12,7 @@
 ### Create a file named vault-config.hcl with the following content:
 
 nginx
-Copy
-Edit
+
 listener "tcp" {
   address = "0.0.0.0:8200"
   tls_disable = true
@@ -41,8 +40,6 @@ ui = true
 ### In the terminal, navigate to the lab directory, create the storage directory, and start the Vault server:
 
 bash
-Copy
-Edit
 cd Section06-Starting_a_Production_Vault_Server
 mkdir -p vault/data
 vault server -config=./vault-config.hcl
@@ -52,22 +49,16 @@ This will start Vault and display logs with the API and cluster addresses.
 ### In a new terminal tab, set the VAULT_ADDR environment variable to the Vault address:
 
 arduino
-Copy
-Edit
 export VAULT_ADDR=http://localhost:8200
 Now, initialize the Vault server with the following command:
 
 vbnet
-Copy
-Edit
 vault operator init -key-shares=1 -key-threshold=1
 This will generate an unseal key and a root token. Save these for later use.
 
 ### Set the VAULT_TOKEN environment variable to the root token:
 
 arduino
-Copy
-Edit
 export VAULT_TOKEN=<root_token>
 Note: Replace <root_token> with the actual root token returned from the initialization step.
 
@@ -75,15 +66,11 @@ Note: Replace <root_token> with the actual root token returned from the initiali
 ### Unseal the Vault server by providing the unseal key:
 
 cpp
-Copy
-Edit
 vault operator unseal
 
 ### Vault should now be unsealed. You can check the status with:
 
 lua
-Copy
-Edit
 vault status
 It should show that "Initialized" is true and "Sealed" is false.
 
@@ -93,8 +80,6 @@ It should show that "Initialized" is true and "Sealed" is false.
 ### Create a directory for logs and enable audit logging:
 
 bash
-Copy
-Edit
 mkdir logs
 vault audit enable file file_path=./logs/vault_audit.log
 
@@ -102,8 +87,6 @@ vault audit enable file file_path=./logs/vault_audit.log
 #To view the logs, open a third terminal and run:
 
 bash
-Copy
-Edit
 tail -f ./logs/vault_audit.log | jq
 
 ## 6. Access the Vault UI
